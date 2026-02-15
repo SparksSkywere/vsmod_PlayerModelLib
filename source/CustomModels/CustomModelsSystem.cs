@@ -215,16 +215,8 @@ public sealed class CustomModelsSystem : ModSystem
         if (_defaultLoaded) return;
         _defaultLoaded = true;
 
-        Shape defaultShape;
-        if (_clientApi != null)
-        {
-            defaultShape = LoadShape(_clientApi, _defaultModelPath) ?? throw new ArgumentException("[Player Model lib] Unable to load default player shape.");
-            defaultShape.ResolveReferences(_clientApi.Logger, "PlayerModelLib:CustomModel-default");
-        }
-        else
-        {
-            defaultShape = new();
-        }
+        Shape defaultShape = LoadShape(_api, _defaultModelPath) ?? throw new ArgumentException("[Player Model lib] Unable to load default player shape.");
+        defaultShape.ResolveReferences(_api.Logger, "PlayerModelLib:CustomModel-default");
 
         IAsset defaultConfigAsset = _api.Assets.Get("playermodellib:config/default-model-config.json");
         Dictionary<string, CustomModelConfig> defaultConfigList = FromAsset(defaultConfigAsset);
@@ -272,8 +264,8 @@ public sealed class CustomModelsSystem : ModSystem
             ScaleColliderWithSizeVertically = defaultConfig.ScaleColliderWithSizeVertically,
             MaxEyeHeight = defaultConfig.MaxEyeHeight,
             MinEyeHeight = defaultConfig.MinEyeHeight,
-            AddTags = _api.TagRegistry.EntityTagsToTagArray(defaultConfig.AddTags),
-            RemoveTags = _api.TagRegistry.EntityTagsToTagArray(defaultConfig.RemoveTags),
+            /*AddTags = _api.TagRegistry.EntityTagsToTagArray(defaultConfig.AddTags),
+            RemoveTags = _api.TagRegistry.EntityTagsToTagArray(defaultConfig.RemoveTags),*/
             ModelSizeFactor = defaultConfig.ModelSizeFactor,
             HeadBobbingScale = defaultConfig.HeadBobbingScale,
             GuiModelScale = defaultConfig.GuiModelScale,
@@ -388,8 +380,8 @@ public sealed class CustomModelsSystem : ModSystem
             ScaleColliderWithSizeVertically = modelConfig.ScaleColliderWithSizeVertically,
             MaxEyeHeight = modelConfig.MaxEyeHeight,
             MinEyeHeight = modelConfig.MinEyeHeight,
-            AddTags = api.TagRegistry.EntityTagsToTagArray(modelConfig.AddTags),
-            RemoveTags = api.TagRegistry.EntityTagsToTagArray(modelConfig.RemoveTags),
+            /*AddTags = api.TagRegistry.EntityTagsToTagArray(modelConfig.AddTags),
+            RemoveTags = api.TagRegistry.EntityTagsToTagArray(modelConfig.RemoveTags),*/
             ModelSizeFactor = modelConfig.ModelSizeFactor,
             HeadBobbingScale = modelConfig.HeadBobbingScale,
             GuiModelScale = modelConfig.GuiModelScale,
@@ -641,7 +633,7 @@ public sealed class CustomModelsSystem : ModSystem
         {
             foreach ((_, CustomModelConfig modelConfig) in customModelConfigs)
             {
-                api.TagRegistry.RegisterEntityTags(modelConfig.AddTags);
+                //api.TagRegistry.RegisterEntityTags(modelConfig.AddTags);
             }
         }
     }
