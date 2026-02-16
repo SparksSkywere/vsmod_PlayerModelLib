@@ -32,6 +32,20 @@
       "default": true
     },
     {
+      "code": "tesselate_player_shape_off_thread",
+      "type": "boolean",
+      "ingui": "playermodellib:setting-tesselate_player_shape_off_thread",
+      "clientSide": true,
+      "default": false
+    },
+    {
+      "code": "log_off_thread_tesselation_errors",
+      "type": "boolean",
+      "ingui": "playermodellib:setting-log_off_thread_tesselation_errors",
+      "clientSide": true,
+      "default": true
+    },
+    {
       "code": "disable_model_classes_and_traits",
       "type": "boolean",
       "ingui": "playermodellib:setting-disable_model_classes_and_traits",

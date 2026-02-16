@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Diagnostics;
-using System.Text;
 using System.Text.RegularExpressions;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -25,7 +23,7 @@ public static class ShapeReplacementUtil
 
         string? currentModel = skinBehavior?.CurrentModelCode;
 
-        if (skinBehavior == null || currentModel == null || itemId == 0 || _system == null || !_system.ModelsLoaded || currentModel == "seraph") return;
+        if (skinBehavior == null || currentModel == null || itemId == 0 || _system == null || !_system.ModelsLoaded || currentModel == _system.SeraphModelCode) return;
 
         CustomModelData customModel = _system.CustomModels[currentModel];
 

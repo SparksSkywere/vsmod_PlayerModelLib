@@ -27,6 +27,7 @@ public sealed class CustomModelsSystem : ModSystem
     public HashSet<string> ExclusiveClasses { get; private set; } = [];
     public Dictionary<string, BaseShapeData> BaseShapesData { get; private set; } = [];
     public bool CanHotLoad => ModelsLoaded;
+    public string SeraphModelCode => _defaultModelCode;
 
     public event Action? OnCustomModelsLoaded;
     public event Action<string>? OnCustomModelHotLoaded;

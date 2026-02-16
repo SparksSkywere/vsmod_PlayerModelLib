@@ -10,6 +10,18 @@ public sealed class Settings
     public bool ExportShapeFiles { get; set; } = false;
     public string DefaultModelCode { get; set; } = "seraph";
     public bool DisableModelClassesAndTraits { get; set; } = false;
+    public bool TesselatePlayerShapeOffThread { get; set; } = false;
+    public bool LogOffThreadTesselationErrors { get; set; } = true;
+}
+
+public sealed class LatePlayerModelModSystem : ModSystem
+{
+    public override double ExecuteOrder() => 1;
+
+    public override void StartClientSide(ICoreClientAPI api)
+    {
+        api.RegisterEntityRendererClass("PlayerShape", typeof(CustomPlayerShapeRenderer));
+    }
 }
 
 public sealed class PlayerModelModSystem : ModSystem
@@ -58,7 +70,7 @@ public sealed class PlayerModelModSystem : ModSystem
             StatsPatches.Unpatch("PlayerModelLib");
             _patched = false;
         }
-        
+
         ShapesCache?.Dispose();
         ShapeReplacementUtil.StaticDispose();
     }
